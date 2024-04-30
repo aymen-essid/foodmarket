@@ -24,10 +24,6 @@ class Supplier
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'Supplier')]
     private Collection $products;
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {

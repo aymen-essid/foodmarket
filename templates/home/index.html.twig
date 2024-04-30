@@ -3,21 +3,41 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <div class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Well done!</h4>
-    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-    <hr>
-    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+<div class="class="input-group flex-nowrap"">
+
+    <div class="row">
+        <h1>Import Mercurial</h1>
     </div>
 
-    
+    <div class="v-spacer"></div>
+
+    <div class="row g-3">
+    {{ form_start(formImport) }}
+        <div class="my-custom-class-for-errors">
+            {{ form_errors(formImport) }}
+        </div>
+
+        <div class="row">
+            <div class="input-group col-auto">
+                {{ form_label(formImport.importFile, 'Sélectionnez un Fichier import', {'label_attr': {'class': 'form-label', 'for': 'formFile' }}) }}
+                {{ form_widget(formImport.importFile, {'attr': {'class': 'form-control', 'id' : 'formFile'}}) }}
+            </div>
+            <div class="v-spacer"></div>
+            <div class="input-group col-auto">
+
+                {{ form_label(formImport.suppliers, '', {'label_attr': {'class': 'form-label', 'for': 'formFile' }}) }}
+                {{ form_widget(formImport.suppliers, {'attr': {'class': 'form-select', 'aria-label' : 'Default select example'}}) }}
+            </div>
+        </div>
+        <div class="v-spacer"></div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Lancer L'import</button>
+        </div>
+    {{ form_end(formImport) }}
+    </div>
+
+
 </div>
 {% endblock %}

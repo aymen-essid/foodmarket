@@ -1,3 +1,7 @@
 body {
     background-color: skyblue;
 }
+
+.v-spacer{
+    margin: 25px auto;
+}
