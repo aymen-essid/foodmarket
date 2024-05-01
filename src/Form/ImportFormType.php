@@ -36,6 +36,7 @@ class ImportFormType extends AbstractType
             ])
             ->add('suppliers', EntityType::class, [
                 'class' => Supplier::class,
+                'label' => 'Sélectionner un fournisseur',
                 'choice_label' => 'name',
                 'expanded' => false,
                 'multiple' => false

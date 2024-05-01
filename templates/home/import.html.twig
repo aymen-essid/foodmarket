@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+<div class="class="input-group flex-nowrap"">
+
+    <div class="row">
+        <h1>Import Mercurial</h1>
+    </div>
+
+    <div class="v-spacer"></div>
+
+    {{ form_start(formImport) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(formImport) }}
+    </div>
+    <div class="mb-3 row">
+        {{ form_label(formImport.importFile, 'Sélectionnez un Fichier Csv', {'label_attr': {'class': 'col-sm-2 col-form-label', 'for': 'formFile' }}) }}
+        <div class="col-sm-5">
+            {{ form_widget(formImport.importFile, {'attr': {'class': 'form-control-plaintext', 'id' : 'formFile'}}) }}
+        </div>
+    </div>
+    <div class="mb-3 row">
+        {{ form_label(formImport.suppliers, '', {'label_attr': {'class': 'col-sm-2 col-form-label', 'for': 'formFile' }}) }}
+        <div class="col-sm-5">
+            {{ form_widget(formImport.suppliers, {'attr': {'class': 'form-select', 'aria-label' : 'Default select example'}}) }}
+        </div>
+        <div class="row col-sm-5 v-spacer"></div>
+            <div class="d-grid gap-2 d-md-flex">
+                <button class="btn btn-primary" type="submit">Lancer L'import</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(formImport) }}
+
+
+
+    <div class="row">
+        <div id="listImports">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom du fichier</th>
+                        <th>Date d'import</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for import in listImport %}
+                    <tr>
+                        <td>{{import.id}}</td>
+                        <td>{{import.fileName}}</td>
+                        <td>{{import.createdAt | date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom du fichier</th>
+                        <th>Date d'import</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

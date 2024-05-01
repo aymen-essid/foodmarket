@@ -35,4 +35,10 @@ return [
     'jquery' => [
         'version' => '3.7.1',
     ],
+    'datatable' => [
+        'version' => '2.0.2',
+    ],
+    'underscore' => [
+        'version' => '1.4.4',
+    ],
 ];

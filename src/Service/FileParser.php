@@ -2,9 +2,13 @@
 
 namespace App\Service;
 
+use SplFileObject;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
-Class FileParser {
+Class FileParser{
 
     public function __construct(
         private string $targetDirectory
@@ -26,13 +30,9 @@ Class FileParser {
      */
     public function parseCSV(string $fileName)
     {
-        $ignoreFirstLine = $this->csvParsingOptions['ignoreFirstLine'];
 
         $finder = new Finder();
-        $finder->files()
-            ->in($this->getTargetDirectory())
-            ->name($fileName)
-        ;
+        $finder->files()->in($this->getTargetDirectory())->name($fileName);
 
         foreach ($finder as $file) { $csv = $file; }
 
@@ -43,7 +43,7 @@ Class FileParser {
                 $i++;
                 // keep only 3 first columns 
                 $data = array_splice($data, 0, $this->csvParsingOptions['nbColumns']);
-                if ($ignoreFirstLine && $i == 1) { continue; }
+                if ($this->csvParsingOptions['ignoreFirstLine'] && $i == 1) { continue; }
                 $rows[] = $data;
             }
             fclose($handle);

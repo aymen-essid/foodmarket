@@ -8,10 +8,12 @@ import './styles/app.css';
 import './vendor/bootstrap/dist/css/bootstrap.min.css';
 
 // assets/app.js
+import 'bootstrap';
 import 'jquery';
 
-// app.js or any other file
-// $('.something').hide(); // WILL NOT WORK!
 
-
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+$(function() {
+    
+    // $(".importForm").hide();
+    
+});

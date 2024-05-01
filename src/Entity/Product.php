@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[UniqueEntity('code')]
@@ -17,12 +18,20 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Length(
+        min: 1,
+        max: 6,
+        minMessage: 'Your code must be at least {{ limit }} characters long',
+        maxMessage: 'Your code cannot be longer than {{ limit }} characters',
+    )]
     private ?string $code = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
+    #[Assert\LessThan(1000)]
     private ?float $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]

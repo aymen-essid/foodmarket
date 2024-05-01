@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImportRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ImportRepository::class)]
 class Import
@@ -13,6 +14,7 @@ class Import
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $fileName = null;
 
