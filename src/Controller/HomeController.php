@@ -3,11 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Import;
-use App\Entity\Supplier;
 use App\Form\ImportFormType;
+use App\Message\SendEmailMessage;
 use App\Repository\ImportRepository;
 use App\Repository\ProductRepository;
-use App\Service\BaseParser;
 use App\Service\FileParser;
 use App\Service\FileUploader;
 use App\Service\ImportManager;
@@ -16,8 +15,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Mime\Email;
+
 
 class HomeController extends AbstractController
 {
@@ -82,5 +84,15 @@ class HomeController extends AbstractController
             'formImport' => $formImport,
             'listImport' => $imports
         ]);
+    }
+
+    public function notification(MessageBusInterface $bus): Response
+    {
+
+        // Dispatch the message
+        $message = new SendEmailMessage('recipient@example.com', 'Subject', 'Body');
+        $bus->dispatch($message);
+
+        return new Response('Email sent asynchronously');
     }
 }
